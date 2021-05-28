@@ -1,22 +1,16 @@
-<h3>Contact Page</h3>
-<strong>String Value</strong> : {{ $string }}
-{{ $integerValue }}
-<br/>
-
-<Strong>Array</Strong><br/>
-{{ var_dump($array) }}
-@foreach($array as $item)
-    {{ $item }}<br/>
-@endforeach
-
-<br/>
-<strong>For Loop</strong><br/>
-@for($i=0;$i<count($array);$i++)
-    {{ $array[$i] }}<br/>
-@endfor
-
-<br/>
-@foreach($keyArray as $item )
-    {{ $item['name'] }}<br/>
-    {{ $item['address'] }}<br/><br/>
-@endforeach
+<table border="1px">
+    <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Address</th>
+    </tr>
+    @foreach ($contacts as $contact )
+        <tr>
+            <td>{{ $contact->name }}</td>
+            <td>{{ $contact->phone_number }}</td>
+            <td>{{ $contact->email }}</td>
+            <td>{{ $contact->address }}</td>
+        </tr>
+    @endforeach
+</table>
