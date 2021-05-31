@@ -19,7 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('contacts', [ContactController::class, 'index']);
-
-Route::get('contacts/view',[ContactController::class, 'view']);
-
-
+Route::get('contacts/view/{id}', [ContactController::class, 'view']);

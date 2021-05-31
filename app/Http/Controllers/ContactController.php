@@ -20,8 +20,9 @@ class ContactController extends Controller
         return view('contacts.index',compact('string', 'integerValue', 'array', 'keyArray', 'contacts'));
     }
 
-    public function view()
+    public function view($id)
     {
-        return view('welcome');
+        $contact    =   Contact::findOrFail($id);
+        return view('contacts.view',compact('contact'));
     }
 }
