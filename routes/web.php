@@ -20,3 +20,6 @@ Route::get('/', function () {
 
 Route::get('contacts', [ContactController::class, 'index']);
 Route::get('contacts/view/{id}', [ContactController::class, 'view']);
+Route::get('contacts/create', [ContactController::class, 'create']);
+
+Route::post('contacts', [ContactController::class, 'store']);

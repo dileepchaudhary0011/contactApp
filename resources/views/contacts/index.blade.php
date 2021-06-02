@@ -1,3 +1,4 @@
+<a href="{{ url('contacts/create') }}">Add New</a>
 <table border="1px">
     <tr>
         <th>Name</th>
