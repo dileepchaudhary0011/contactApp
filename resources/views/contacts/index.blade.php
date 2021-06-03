@@ -11,6 +11,12 @@
             <td>{{ $contact->phone_number }}</td>
             <td>
                 <a href="{{ url('contacts/view/'.$contact->id) }}">View</a>
+
+                <form action="{{ url('contacts',$contact->id) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Delete</button>
+                </form>
             </td>
         </tr>
     @endforeach

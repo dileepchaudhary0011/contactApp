@@ -23,3 +23,4 @@ Route::get('contacts/view/{id}', [ContactController::class, 'view']);
 Route::get('contacts/create', [ContactController::class, 'create']);
 
 Route::post('contacts', [ContactController::class, 'store']);
+Route::delete('contacts/{id}', [ContactController::class, 'destroy']);
