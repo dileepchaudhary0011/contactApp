@@ -17,6 +17,7 @@
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit">Delete</button>
                 </form>
+                <a href="{{ url('contacts/'.$contact->id) }}">Edit</a>
             </td>
         </tr>
     @endforeach

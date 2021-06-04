@@ -53,4 +53,28 @@ class ContactController extends Controller
 
         return redirect('contacts');
     }
+
+    public function edit($id){
+        $contact    =   Contact::findOrFail($id);
+
+        return view('contacts.edit', compact('contact'));
+    }
+
+    public function update($id, Request $request )
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phoneNumber'=> 'required'
+        ]);
+
+        $contact    =   Contact::findOrFail($id);
+        $contact->name          =   $request->name;
+        $contact->phone_number  =   $request->phoneNumber;
+        $contact->email         =   ($request->has('email'))?$request->email:'';
+        $contact->address       =   $request->address;
+        $contact->save();
+
+        return redirect('contacts');
+    }
 }
