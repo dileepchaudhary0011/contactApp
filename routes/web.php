@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('contacts', [ContactController::class, 'index'])->middleware(['auth'])->name('contacts');
-Route::get('contacts/view/{id}', [ContactController::class, 'view']);
-Route::get('contacts/create', [ContactController::class, 'create']);
-
-Route::post('contacts', [ContactController::class, 'store']);
-Route::delete('contacts/{id}', [ContactController::class, 'destroy']);
-Route::get('contacts/{id}', [ContactController::class, 'edit']);
-Route::put('contacts/{id}', [ContactController::class, 'update']);
+Route::middleware(['auth'])->group(function(){
+    Route::get('contacts', [ContactController::class, 'index']);
+    Route::get('contacts/view/{id}', [ContactController::class, 'view']);
+    Route::get('contacts/create', [ContactController::class, 'create']);
+    
+    Route::post('contacts', [ContactController::class, 'store']);
+    Route::delete('contacts/{id}', [ContactController::class, 'destroy']);
+    Route::get('contacts/{id}', [ContactController::class, 'edit']);
+    Route::put('contacts/{id}', [ContactController::class, 'update']);
+});
 
 Route::get('/', function () {
     return view('welcome');

@@ -9,15 +9,8 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts   =   Contact::get();
-
-        $string     =   "String value123";
-        $integerValue = 123;
-        $array  =   ['value 1', 'value 2', 'value 3'];
-        $keyArray   =   [array('name' => 'Dileep Kr. Chaudhary', 'address' => 'Gatthaghar'),
-                        array('name' => 'Dipesh', 'address' => 'Gatthaghar'),
-                        array('name' => 'Binod', 'address' => 'Gatthaghar')];
-        return view('contacts.index',compact('string', 'integerValue', 'array', 'keyArray', 'contacts'));
+        $contacts   =   Contact::where('user_id',auth()->user()->id)->get();
+        return view('contacts.index',compact('contacts'));
     }
 
     public function view($id)
@@ -42,6 +35,7 @@ class ContactController extends Controller
         $contact->phone_number  =   $request->phoneNumber;
         $contact->email         =   ($request->has('email'))?$request->email:'';
         $contact->address       =   $request->address;
+        $contact->user_id       =   auth()->user()->id;
         $contact->save();
 
         return redirect('contacts');
