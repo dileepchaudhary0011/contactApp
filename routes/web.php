@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('contacts', [ContactController::class, 'index']);
+    Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
     Route::get('contacts/view/{id}', [ContactController::class, 'view']);
     Route::get('contacts/create', [ContactController::class, 'create']);
     
