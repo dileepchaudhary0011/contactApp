@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $contacts   =   Contact::where('user_id',auth()->user()->id)->get();
-        $contacts       =   auth()->user()->contacts;
-        return view('contacts.index',compact('contacts'));
+        $query      =    auth()->user()->contacts()->orderBy('created_at', 'desc');
+        $key        =   '';
+        if($request->has('key')){
+            $query->where('name', 'like', '%'.$request->key.'%');
+            $query->orWhereDate('created_at', $request->key);
+            $key    =   $request->key;
+        }
+
+        $contacts       =   $query->paginate(5);
+        return view('contacts.index',compact('contacts', 'key'));
     }
 
     public function view($id)
