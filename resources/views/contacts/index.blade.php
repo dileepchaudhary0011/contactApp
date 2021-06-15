@@ -20,7 +20,11 @@
       <tbody>
         @foreach ($contacts as $contact )
           <tr>
-              <td>{{ $contact->name }}</td>
+              <td>
+                @if($contact->profile)
+                    <img src="{{ asset($contact->profile) }}" width="70px" class="d-block">
+                @endif
+                {{ $contact->name }}</td>
               <td>{{ $contact->phone_number }}</td>
               <td>{{ \Carbon\Carbon::parse($contact->created_at)->format('d-M-Y') }}</td>
               <td>

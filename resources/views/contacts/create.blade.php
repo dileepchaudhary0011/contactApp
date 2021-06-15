@@ -12,7 +12,7 @@
         </div>
     @endif
     <br/>
-    <form action="{{ url('contacts') }}" method="post">
+    <form action="{{ url('contacts') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label class="form-label">Name</label>
@@ -32,6 +32,11 @@
         <div class="mb-3">
             <label class="form-label">Phone Number</label>
             <input type="text" class="form-control" name="phoneNumber">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Profile</label>
+            <input type="file" class="form-control" name="profile">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

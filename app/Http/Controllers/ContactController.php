@@ -36,7 +36,8 @@ class ContactController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'phoneNumber'=> 'required'
+            'phoneNumber'=> 'required',
+            'profile'   => 'mimes:jpg,bmp,png'
         ]);
 
         $contact                =   new  Contact();
@@ -45,6 +46,14 @@ class ContactController extends Controller
         $contact->email         =   ($request->has('email'))?$request->email:'';
         $contact->address       =   $request->address;
         $contact->user_id       =   auth()->user()->id;
+
+        if($request->has('profile')){
+            $imageName  =   time().".".$request->profile->extension();
+            $folderPath     =   'files/profile';
+            $request->profile->move(public_path($folderPath),$imageName);
+            $contact->profile   =   $folderPath.'/'.$imageName;
+        }
+
         $contact->save();
 
         return redirect('contacts');
@@ -68,7 +77,8 @@ class ContactController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'phoneNumber'=> 'required'
+            'phoneNumber'=> 'required',
+            'profile'   => 'mimes:jpg,bmp,png'
         ]);
 
         $contact    =   Contact::findOrFail($id);
@@ -76,6 +86,14 @@ class ContactController extends Controller
         $contact->phone_number  =   $request->phoneNumber;
         $contact->email         =   ($request->has('email'))?$request->email:'';
         $contact->address       =   $request->address;
+        unlink($contact->profile);
+        if($request->has('profile')){
+            $imageName  =   time().".".$request->profile->extension();
+            $folderPath     =   'files/profile';
+            $request->profile->move(public_path($folderPath),$imageName);
+            $contact->profile   =   $folderPath.'/'.$imageName;
+        }
+
         $contact->save();
 
         return redirect('contacts');
